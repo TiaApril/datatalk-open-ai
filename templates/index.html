@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>DataTalk - SQL Queries for Non-technical Users</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- JQuery v3.7.1 -->
+  <script src="{{ url_for('static', filename='js/jquery-3.7.1.min.js') }}"></script>
+  <!-- Bootstrap v5.3.3 -->
+  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">  
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  <!-- Font Awesome v4.7.0 -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+  <!-- Custom Style -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <script>
+    $(document).ready(function(){
+        const selectElement = document.getElementById("listPredefined");
+        const textareaElement = document.getElementById("nlqText");
+        selectElement.addEventListener("change", function() {
+            textareaElement.value = selectElement.value;
+        });
+		$("#btnExecute").click(function(){
+		    $("#sqlQueries").html("");
+		    $("#tableNLQtoSQL").html("");
+		    if (textareaElement.value.trim() === "") {
+                alert("The 'natural language query' field must not be empty.");
+                event.preventDefault();
+            } else {
+			const dataToSend = {
+                    message: textareaElement.value,
+                    status: "success"
+            };
+			$.ajax({
+				url: '/api/v1/receive-text',
+				type: 'post',
+				data: JSON.stringify(dataToSend),
+				headers: {
+					"Content-Type": 'application/json'
+				},
+				dataType: 'json',
+				beforeSend: function() {
+					// Show loading image before making request
+					$('#loading').show();
+				},
+				complete: function() {
+					// Hide loading image when request ends
+					$('#loading').hide();
+				},
+				success: function (data) {					
+					$("#sqlQueries").html("<code>"+data.sql_queries+"</code>");
+					$("#tableNLQtoSQL").html(data.received_message);
+				}
+			});
+			}
+		});
+		$("#btnClear").click(function(){
+			textareaElement.value = "";
+			selectElement.selectedIndex = 0;
+		});
+	});
+  </script>
+</head>
+<body>
+
+<!-- logo/title -->
+<div class="py-1 bg-dark text-white text-center">
+  <h1><i class="fa fa-commenting-o" style="font-size:24px"></i>&nbsp;DataTalk</h1>
+  <p>SQL Queries for Non-technical Users</p> 
+</div>
+
+<!-- main -->
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-12">
+	
+	<p>Choose one of the different options:</p>
+	<br>
+	
+  <!-- Nav pills -->
+  <ul class="nav nav-pills" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-bs-toggle="pill" href="#welcome"><i class="fa fa-home" style="font-size:24px"></i>&nbsp;Welcome</a>
+    </li>
+	<li class="nav-item">
+      <a class="nav-link" data-bs-toggle="pill" href="#menuNLQ"><i class="fa fa-terminal" style="font-size:24px"></i>&nbsp;NLQ (Natural Language Query)</a>
+    </li>
+    <!--<li class="nav-item">
+      <a class="nav-link" data-bs-toggle="pill" href="#menuSettings"><i class="fa fa-cogs" style="font-size:24px"></i>&nbsp;Settings</a>
+    </li>-->
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="pill" href="#menuAbout"><i class="fa fa-user-secret" style="font-size:24px"></i>&nbsp;About</a>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+  
+    <div id="welcome" class="container tab-pane active"><br>
+	  <img src="{{ url_for('static', filename='images/image-welcome.png') }}" style="width:70%" class="img-fluid img-thumbnail mx-auto d-block" />	
+    </div>
+	
+    <div id="menuNLQ" class="container tab-pane fade"><br>
+	  <form>
+	      <select id="listPredefined" class="form-select" aria-label="predefined">
+			  <option selected disabled>Choose a predefined query</option>
+			  <option value="Give me the names of all Employees from Cartagena.">Give me the names of all Employees from Cartagena.</option>
+			  <option value="Give me the names and the city of all Employees from Cartagena.">Give me the names and the city of all Employees from Cartagena.</option>
+			  <option value="Give me the employees who are under 35 years old.">Give me the employees who are under 35 years old.</option>
+			  <option value="Give me the employees who are under 35 years old and whose name starts with C.">Give me the employees who are under 35 years old and whose name starts with C.</option>
+		  </select>
+		  <br> <br>
+		  <div class="form-group">
+			<label for="nlqText">Enter a natural language query below:</label>
+			<textarea class="form-control" id="nlqText" rows="5"></textarea>
+		  </div>
+		  <div class="form-group">
+			<button type="button" id="btnExecute" class="btn btn-success btn-lg mt-3">Execute&nbsp;<i class="fa fa-bolt" style="font-size:24px"></i></button>
+			<button type="button" id="btnClear" class="btn btn-secondary btn-lg mt-3">Clear&nbsp;<i class="fa fa-repeat" style="font-size:24px"></i></button> 
+		  </div>
+	  </form>
+	  <hr>
+	  <div id="loading" style="display: none;">
+        <img src="{{ url_for('static', filename='images/loading.gif') }}" style="width:150px;" class="mx-auto d-block" alt="Loading..." />
+      </div>	  
+	  <div id="sqlQueries" class="container mt-3">	  
+	  </div>
+	  <div id="tableNLQtoSQL" class="container mt-3">	  
+	  </div>
+    </div>
+	
+	<!--
+    <div id="menuSettings" class="container tab-pane fade"><br>      
+      <p>These features are available in the next version&nbsp;<i class="fa fa-rocket" style="font-size:48px;color:#2196f3"></i></p>
+    </div>
+	-->
+	
+	<div id="menuAbout" class="container tab-pane fade"><br>
+      <h3><i class="fa fa-commenting-o" style="font-size:24px"></i>&nbsp;DataTalk - SQL Queries for Non-technical Users</h3>
+      <p>
+	  DataTalk is an AI-powered conversational interface that allows non-technical users to interact with large data sets using natural language. 
+	  Users can ask questions about their data, such as “What is sales performance this month?” or “What are our best-selling products?” and the AI ​​responds by generating clear visualizations and summaries. 
+	  Additionally, DataTalk includes a monitoring system that tracks data processing token usage and provides alerts when costs start to rise.
+	  </p>
+	  <br>
+	  <img src="{{ url_for('static', filename='images/image-about.png') }}" style="width:70%" class="img-fluid img-thumbnail mx-auto d-block" />
+    </div>
+	
+  </div>	 
+	 
+    </div>
+  </div>
+</div>
+
+<!-- footer -->
+<footer class="bg-dark text-white text-center py-1 mt-auto">
+        <div class="container">
+            <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Carlos Gonzalez/Tiana Aprianti (Team). All rights reserved.</p>
+        </div>
+</footer>
+
+</body>
+</html>

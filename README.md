@@ -11,8 +11,9 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
 ```bash
 pip install openai==1.52.2
 pip install pyodbc==5.2.0
-pip install flask==2.0.2
-pip install flask-cors==5.0.0
+pip install Flask==2.2.2
+pip install gunicorn
+pip install Werkzeug==2.2.2
 ```
 
 ## Usage

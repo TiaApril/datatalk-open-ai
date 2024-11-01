@@ -30,6 +30,9 @@ python api.py
 - Azure App Service
 - HTML, CSS (Bootstrap/Font Awesome), Javascript (JQuery/Ajax)
 
+## Architecture
+![ArquitecturaAI](https://github.com/user-attachments/assets/ac3a04f1-7397-4aaf-b271-c972e007f42d)
+
 ## Acknowledgements
 
 We extend our gratitude to CodigoFacilito and Microsoft for organizing and hosting this Hackathon AI challenge. 

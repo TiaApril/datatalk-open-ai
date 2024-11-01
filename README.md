@@ -4,6 +4,9 @@
 
 [ES] DataTalk es una interfaz conversacional impulsada por IA que permite a usuarios no técnicos interactuar con grandes conjuntos de datos utilizando lenguaje natural. Los usuarios pueden hacer preguntas sobre sus datos, como "¿Cuál es el rendimiento de ventas este mes?" o "¿Cuáles son nuestros productos más vendidos?", y la IA responde generando visualizaciones claras y resúmenes.
 
+## Presentation (file PDF):
+[Presentation-DataTalk.pdf](https://github.com/user-attachments/files/17596198/Presentation-DataTalk.pdf)
+
 ## Requirements
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.

@@ -19,7 +19,7 @@ pip install Werkzeug==2.2.2
 ## Usage
 
 ```python
-python api.py
+python app.py
 ```
 
 ## Technologies used:

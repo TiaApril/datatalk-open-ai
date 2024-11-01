@@ -83,6 +83,7 @@ This project was developed by a passionate team of programming and AI enthusiast
 
 >_ Carlos Gonzalez
    Linkedin: <a href="https://www.linkedin.com/in/gozcode/">https://www.linkedin.com/in/gozcode/</a>
+   
 >_ Tiana Aprianti
    Linkedin: <a href="https://www.linkedin.com/in/tiana-aprianti/">https://www.linkedin.com/in/tiana-aprianti/</a>
    

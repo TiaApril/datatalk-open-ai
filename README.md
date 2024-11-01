@@ -4,6 +4,10 @@
 
 [ES] DataTalk es una interfaz conversacional impulsada por IA que permite a usuarios no técnicos interactuar con grandes conjuntos de datos utilizando lenguaje natural. Los usuarios pueden hacer preguntas sobre sus datos, como "¿Cuál es el rendimiento de ventas este mes?" o "¿Cuáles son nuestros productos más vendidos?", y la IA responde generando visualizaciones claras y resúmenes.
 
+## Our contribution
+
+This project was born from the idea of ​​helping people who do not have knowledge of languages ​​such as SQL.
+
 ## Presentation (file PDF):
 [Presentation-DataTalk.pdf](https://github.com/user-attachments/files/17596198/Presentation-DataTalk.pdf)
 
@@ -28,13 +32,21 @@ python app.py
 2. Settings environment variables (application settings - App Service):
 
 API_ENDPOINT_OPENAI=https://{URL_Generate_Service}.openai.azure.com/
+
 API_KEY_OPENAI={Token}
+
 API_NAME_MODEL={Model_Name}
+
 API_VERSION_OPENAI=2024-08-01-preview
+
 AZURE_SQL_DB_NAME={Name_Database}
+
 AZURE_SQL_DRIVER_SQL_SERVER=ODBC Driver 17 for SQL Server
+
 AZURE_SQL_SERVER={Name_Service_Azure}.database.windows.net
+
 AZURE_SQL_USER={Username_DB}
+
 AZURE_SQL_PASSWD={Password_DB}
    
 ## Technologies used:
@@ -79,7 +91,8 @@ Calculates the total balance earned by an employee during their years in the com
 Tell me which position earns the most salary, sort by salary. But don't include "Gerente de Proyectos"
 
 ##  Team Members:
-This project was developed by a passionate team of programming and AI enthusiasts. For more information about each team member, visit their profiles:
+
+The project was developed and designed by the following people who are AI enthusiasts and crazys for programming in general.
 
 >_ Carlos Gonzalez
    Linkedin: <a href="https://www.linkedin.com/in/gozcode/">https://www.linkedin.com/in/gozcode/</a>
